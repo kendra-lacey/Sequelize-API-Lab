@@ -1,4 +1,4 @@
-const { Plant } = require("../models")
+const { Plant, Watering } = require("../models")
 
 const create = async (req, res) => {
   try {
@@ -11,7 +11,9 @@ const create = async (req, res) => {
 
 const index = async (req, res) => {
   try {
-    const plants = await Plant.findAll()
+    const plants = await Plant.findAll({
+      include: [{model: Watering, as: 'waterings' }]
+    })
     res.status(200).json(plants)
   } catch (error) {
     res.status(500).json(error)
@@ -50,11 +52,22 @@ deletePlant = async (req, res) => {
   }
 }
 
+const addWatering = async (req, res) => {
+  try {
+    req.body.plantId = req.params.id
+    const watering = await Watering.create(req.body)
+    res.status(200).json(watering)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 
 module.exports = {
   create,
   index,
   show,
   update,
-  delete: deletePlant
+  delete: deletePlant,
+  addWatering
 }
