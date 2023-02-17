@@ -10,13 +10,20 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       day: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM('Monday','Tuesday','Wednesday','Thursday','Friday', 'Saturday', 'Sunday'),
+        defaultValue: 'Sunday'
       },
       plantFoodAdded: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM('Yes', 'No')
       },
       plantId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull:false,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Plants',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

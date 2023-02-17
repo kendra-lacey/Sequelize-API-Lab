@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Watering.belongsTo(models.Plant, {
+        foreignKey: 'plantId',
+      })
     }
   }
   Watering.init({
