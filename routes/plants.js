@@ -3,5 +3,6 @@ const PlantsCtrl = require('../controllers/plants.js')
 
 
 router.post('/', PlantsCtrl.create)
+router.get('/', PlantsCtrl.index)
 
   module.exports = router
