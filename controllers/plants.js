@@ -11,7 +11,8 @@ const create = async (req, res) => {
 
 const index = async (req, res) => {
   try {
-    
+    const plants = await Plant.findAll()
+    res.status(200).json(plants)
   } catch (error) {
     res.status(500).json(error)
   }
