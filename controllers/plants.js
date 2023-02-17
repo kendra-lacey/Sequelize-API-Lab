@@ -30,13 +30,23 @@ const show = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const plant = await Plant.update(
-      req.body,
-      {where: { id: req.params.id }, returning: true }
-    )
+    const plant = await Plant.findByPk(
+      req.params.id)
+      plant.set(req.body)
+      await plant.save()
     res.status(200).json(plant)
   } catch (error) {
     res.status(500).json({msg: 'Error updating plant'})
+  }
+}
+
+deletePlant = async (req, res) => {
+  try {
+    const plant = await Plant.findByPk(req.params.id)
+    await plant.destroy()
+    res.status(200).json(plant)
+  } catch (error) {
+    res.status(500).json(error)
   }
 }
 
@@ -46,4 +56,5 @@ module.exports = {
   index,
   show,
   update,
+  delete: deletePlant
 }
