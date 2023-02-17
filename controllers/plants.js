@@ -20,10 +20,19 @@ const index = async (req, res) => {
 
 const show = async (req, res) => {
   try {
-    const plant = Plant.findByPK(req.params.id)
+    const plant = await Plant.findByPk(req.params.id)
     res.status(200).json(plant)
   } catch (error) {
-    res.status(500).json(error)
+    console.log(error)
+    res.status(500).json({msg: 'Error getting plant'})
+  }
+}
+
+const update = async (req, res) => {
+  try {
+    
+  } catch (error) {
+    res.status(500).json({msg: 'Error updating plant'})
   }
 }
 
@@ -32,4 +41,5 @@ module.exports = {
   create,
   index,
   show,
+  update,
 }

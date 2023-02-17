@@ -1,9 +1,10 @@
 const router = require('express').Router()
-const PlantsCtrl = require('../controllers/plants.js')
+const plantsCtrl = require('../controllers/plants.js')
 
 
-router.post('/', PlantsCtrl.create)
-router.get('/', PlantsCtrl.index)
-router.get('/:id', PlantsCtrl.show)
+router.get('/', plantsCtrl.index)
+router.get('/:id', plantsCtrl.show)
+router.post('/', plantsCtrl.create)
+router.put('/:id', plantsCtrl.update)
 
   module.exports = router
