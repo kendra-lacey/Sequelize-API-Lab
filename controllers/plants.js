@@ -20,7 +20,8 @@ const index = async (req, res) => {
 
 const show = async (req, res) => {
   try {
-    
+    const plant = Plant.findByPK(req.params.id)
+    res.status(200).json(plant)
   } catch (error) {
     res.status(500).json(error)
   }
